@@ -1,0 +1,87 @@
+.profile-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profile-header h2 {
+    margin: 0;
+    color: #1e293b;
+}
+
+.profile-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.profile-section label {
+    font-weight: 600;
+    color: #334155;
+    align-self: center;
+}
+
+.profile-section div,
+.profile-section input {
+    color: #475569;
+    font-size: 1rem;
+}
+
+.profile-section input {
+    padding: 0.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.profile-actions button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.profile-actions button:first-child {
+    background-color: #e2e8f0;
+    /* Cancel - light gray */
+    color: #1e293b;
+}
+
+.profile-actions button:first-child:hover {
+    background-color: #cbd5e1;
+}
+
+.profile-actions button:last-child {
+    background-color: #3b82f6;
+    /* Save - blue */
+    color: white;
+}
+
+.profile-actions button:last-child:hover {
+    background-color: #2563eb;
+}
+
+.performance-section h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}

@@ -1,0 +1,106 @@
+.scorecard-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.scorecard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.scorecard-header h2 {
+    margin: 0;
+    color: #1e293b;
+}
+
+.score-display {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.score-display div {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.score-display p {
+    color: #64748b;
+    margin-top: 0.5rem;
+}
+
+.metrics-section,
+.edit-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.metrics-section div {
+    display: flex;
+    flex-direction: column;
+}
+
+.metrics-section div div:first-child {
+    font-weight: 600;
+    color: #334155;
+}
+
+.metrics-section div div:last-child {
+    color: #475569;
+    font-size: 1rem;
+}
+
+.edit-section label {
+    font-weight: 600;
+    color: #334155;
+}
+
+.edit-section input {
+    padding: 0.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #1e293b;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.button-group button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button-group button:first-child {
+    background-color: #e2e8f0;
+    color: #1e293b;
+}
+
+.button-group button:first-child:hover {
+    background-color: #cbd5e1;
+}
+
+.button-group button:last-child {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.button-group button:last-child:hover {
+    background-color: #2563eb;
+}
