@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import "./Profile.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../reduxtoolkit/store/store";
+import { updateUser } from "../reduxtoolkit/slices/authSlice";
+import "./Score.scss";
 
 const Score = () => {
+    const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.auth.currentUser);
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", user)
 
     const [isEditing, setIsEditing] = useState(false);
-    const [metrics, setMetrics] = useState(user?.performanceMetrics || null);
+    const [metrics, setMetrics] = useState(user?.performanceMetrics || {});
     const [userScore, setUserScore] = useState(user?.score || 0);
 
     if (!user) {
@@ -17,11 +18,9 @@ const Score = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        if (!metrics) return;
-
         setMetrics({
             ...metrics,
-            [name]: name === "customerSatisfaction" || name === "callsHandled" || name === "closedTickets"
+            [name]: name.includes("Score") || name.includes("Percentage")
                 ? parseInt(value)
                 : value,
         });
@@ -37,8 +36,8 @@ const Score = () => {
             score: userScore,
             performanceMetrics: metrics,
         };
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-        window.location.reload(); // Refresh to simulate update
+        dispatch(updateUser(updatedUser));
+        setIsEditing(false);
     };
 
     return (
@@ -49,68 +48,74 @@ const Score = () => {
                 <p><strong>Name:</strong> {user.name}</p>
                 <p><strong>Email:</strong> {user.email}</p>
                 <p><strong>Join Date:</strong> {user.joinDate}</p>
-                <p><strong>Score:</strong>
-                    {isEditing ? (
-                        <input
-                            type="number"
-                            name="score"
-                            value={userScore}
-                            onChange={handleScoreChange}
-                        />
-                    ) : (
-                        userScore ?? "N/A"
-                    )}
-                </p>
             </div>
 
             {metrics && (
                 <div className="performance-metrics">
                     <h3>Performance Metrics</h3>
-                    {isEditing ? (
+
+                    {!isEditing ? (
                         <>
-                            <p>
-                                <strong>Calls Handled:</strong>{" "}
-                                <input
-                                    type="number"
-                                    name="callsHandled"
-                                    value={metrics.callsHandled}
-                                    onChange={handleChange}
-                                />
-                            </p>
-                            <p>
-                                <strong>Customer Satisfaction:</strong>{" "}
-                                <input
-                                    type="number"
-                                    name="customerSatisfaction"
-                                    value={metrics.customerSatisfaction}
-                                    onChange={handleChange}
-                                />
-                            </p>
-                            <p>
-                                <strong>Avg. Response Time:</strong>{" "}
-                                <input
-                                    type="text"
-                                    name="responseTime"
-                                    value={metrics.responseTime}
-                                    onChange={handleChange}
-                                />
-                            </p>
-                            <p>
-                                <strong>Closed Tickets:</strong>{" "}
-                                <input
-                                    type="number"
-                                    name="closedTickets"
-                                    value={metrics.closedTickets}
-                                    onChange={handleChange}
-                                />
-                            </p>
+                            <table className="metrics-table">
+                                <thead><tr><th colSpan={2}>Coding Platform Scores</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Leetcode</td><td>{metrics.leetcodeScore}</td></tr>
+                                    <tr><td>HackerRank</td><td>{metrics.hackerrankScore}</td></tr>
+                                </tbody>
+                            </table>
+
+                            <table className="metrics-table">
+                                <thead><tr><th colSpan={2}>Weekly Progress Score</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Week 1 </td><td>{metrics.week1Score}</td></tr>
+                                    <tr><td>Week 2 </td><td>{metrics.week2Score}</td></tr>
+                                    <tr><td>Week 3 </td><td>{metrics.week3Score}</td></tr>
+                                </tbody>
+                            </table>
+
+                            <table className="metrics-table">
+                                <thead><tr><th colSpan={2}>Assignments</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Assignment 1 </td><td>{metrics.assignment1Percentage}%</td></tr>
+                                    <tr><td>Assignment 2 </td><td>{metrics.assignment2Percentage}%</td></tr>
+                                    <tr><td>Assignment 3 </td><td>{metrics.assignment3Percentage}%</td></tr>
+                                </tbody>
+                            </table>
+
+                            <table className="metrics-table">
+                                <thead><tr><th colSpan={2}>Evaluations Marks</th></tr></thead>
+                                <tbody>
+                                    <tr><td>EF Test Score</td><td>{metrics.EFTestScore}</td></tr>
+                                    <tr><td>Mock Evaluation 1 </td><td>{metrics.mockEvaluation1Score}</td></tr>
+                                    <tr><td>Mock Evaluation 2 </td><td>{metrics.mockEvaluation2Score}</td></tr>
+                                    <tr><td>Mock Evaluation 3 </td><td>{metrics.mockEvaluation3Score}</td></tr>
+                                </tbody>
+                            </table>
+
+                            <table className="metrics-table">
+                                <thead><tr><th colSpan={2}>Learning Progress</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Learning Certificates </td><td>{metrics.learningCertificatesDone?.join(", ")}</td></tr>
+                                    <tr><td>Courses Completed</td><td>{metrics.coursesCompleted?.join(", ")}</td></tr>
+                                </tbody>
+                            </table>
                         </>
                     ) : (
                         <>
-                            <p><strong>Calls Handled:</strong> {metrics.callsHandled}</p>
-                            <p><strong>Customer Satisfaction:</strong> {metrics.customerSatisfaction}%</p>
-                            <p><strong>Avg. Response Time:</strong> {metrics.responseTime}</p>
-                            <p><strong>Closed Tickets:</strong> {metrics.closedTickets}</p>
+                            <p><strong>Leetcode Score:</strong> <input type="number" name="leetcodeScore" value={metrics.leetcodeScore || 0} onChange={handleChange} /></p>
+                            <p><strong>Hackerrank Score:</strong> <input type="number" name="hackerrankScore" value={metrics.hackerrankScore || 0} onChange={handleChange} /></p>
+                            <p><strong>Week 1 Score:</strong> <input type="number" name="week1Score" value={metrics.week1Score || 0} onChange={handleChange} /></p>
+                            <p><strong>Week 2 Score:</strong> <input type="number" name="week2Score" value={metrics.week2Score || 0} onChange={handleChange} /></p>
+                            <p><strong>Week 3 Score:</strong> <input type="number" name="week3Score" value={metrics.week3Score || 0} onChange={handleChange} /></p>
+                            <p><strong>Assignment 1 Percentage:</strong> <input type="number" name="assignment1Percentage" value={metrics.assignment1Percentage || 0} onChange={handleChange} /></p>
+                            <p><strong>Assignment 2 Percentage:</strong> <input type="number" name="assignment2Percentage" value={metrics.assignment2Percentage || 0} onChange={handleChange} /></p>
+                            <p><strong>Assignment 3 Percentage:</strong> <input type="number" name="assignment3Percentage" value={metrics.assignment3Percentage || 0} onChange={handleChange} /></p>
+                            <p><strong>EF Test Score:</strong> <input type="number" name="EFTestScore" value={metrics.EFTestScore || 0} onChange={handleChange} /></p>
+                            <p><strong>Learning Certificates Done:</strong> <input type="text" name="learningCertificatesDone" value={metrics.learningCertificatesDone?.join(", ") || ""} onChange={handleChange} /></p>
+                            <p><strong>Courses Completed:</strong> <input type="text" name="coursesCompleted" value={metrics.coursesCompleted?.join(", ") || ""} onChange={handleChange} /></p>
+                            <p><strong>Mock Evaluation 1 Score:</strong> <input type="number" name="mockEvaluation1Score" value={metrics.mockEvaluation1Score || 0} onChange={handleChange} /></p>
+                            <p><strong>Mock Evaluation 2 Score:</strong> <input type="number" name="mockEvaluation2Score" value={metrics.mockEvaluation2Score || 0} onChange={handleChange} /></p>
+                            <p><strong>Mock Evaluation 3 Score:</strong> <input type="number" name="mockEvaluation3Score" value={metrics.mockEvaluation3Score || 0} onChange={handleChange} /></p>
                         </>
                     )}
                 </div>

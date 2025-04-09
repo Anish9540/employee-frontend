@@ -1,20 +1,18 @@
-// src/components/Navbar.tsx
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../reduxtoolkit/slices/authSlice";
+import { RootState } from "../reduxtoolkit/store/store";
 import "./Navbar.scss";
-import { logout } from "../slices/authSlice";
 
 const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // const handleLogout = () => {
-    //     navigate("/");
-    // };
+    const user = useSelector((state: RootState) => state.auth.currentUser);
+
     const handleLogout = () => {
-        dispatch(logout());          // ⬅️ CLEAR user from store
-        navigate("/");               // ⬅️ THEN navigate to login
+        dispatch(logout());
+        navigate("/");
     };
 
     return (
@@ -26,10 +24,16 @@ const Navbar = () => {
             </div>
             <div className="nav-right">
                 <img
-                    src="https://via.placeholder.com/40"
-                    alt="User"
+                    src={user?.img}
+                    alt="img"
                     className="user-image"
                 />
+
+                <div className="user-status">
+                    <h3>{user?.status}</h3>
+                </div>
+
+
                 <button className="logout-button" onClick={handleLogout}>Logout</button>
             </div>
         </header>
@@ -37,3 +41,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

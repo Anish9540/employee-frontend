@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../slices/authSlice";
-import { AppDispatch, RootState } from "../store/store";
+import { login } from "../reduxtoolkit/slices/authSlice";
+import { AppDispatch, RootState } from "../reduxtoolkit/store/store";
 import "./AuthForm.scss";
 
 interface FormData {
@@ -12,7 +12,7 @@ interface FormData {
 
 const AuthForm = () => {
     const [formData, setFormData] = useState<FormData>({
-        email: "",
+        email: "alice.johnson@example.com",
         password: "",
     });
     const [errors, setErrors] = useState<Partial<FormData>>({});
