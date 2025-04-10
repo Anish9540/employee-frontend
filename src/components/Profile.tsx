@@ -33,6 +33,25 @@ const Profile = () => {
         }
     };
 
+    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file && (file.type === "image/png" || file.type === "image/jpeg")) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setEditedUser((prevUser) => {
+                    if (!prevUser) return null;
+                    return {
+                        ...prevUser,
+                        img: reader.result as string,
+                    };
+                });
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert("Only PNG and JPG files are allowed.");
+        }
+    };
+
     const handleSave = () => {
         if (editedUser) {
             localStorage.setItem("currentUser", JSON.stringify(editedUser));
@@ -51,7 +70,11 @@ const Profile = () => {
             <div className="profile-info">
                 <div className="profile-image-container">
                     <img
-                        src={isEditing ? editedUser?.img || "/default-avatar.png" : user.img || "/default-avatar.png"}
+                        src={
+                            isEditing
+                                ? editedUser?.img || "/default-avatar.png"
+                                : user.img || "/default-avatar.png"
+                        }
                         alt="Profile"
                         className="profile-image"
                     />
@@ -59,34 +82,86 @@ const Profile = () => {
 
                 {isEditing ? (
                     <>
-                        {/* <label>
-                            Image URL:
-                            <input name="img" value={editedUser?.img || ""} onChange={handleChange} />
-                        </label> */}
                         <label>
-                            Username: <input name="username" value={editedUser?.name || ""} onChange={handleChange} />
+                            Upload Image:
+                            <input
+                                type="file"
+                                accept="image/png, image/jpeg"
+                                onChange={handleImageUpload}
+                            />
+                        </label>
+                        {editedUser?.img && (
+                            <img
+                                src={editedUser.img}
+                                alt="Preview"
+                                className="profile-image preview"
+                            />
+                        )}
+                        <label>
+                            Username:
+                            <input
+                                name="username"
+                                value={editedUser?.name || ""}
+                                onChange={handleChange}
+                            />
                         </label>
                         <label>
-                            Name: <input name="name" value={editedUser?.name || ""} onChange={handleChange} />
+                            Name:
+                            <input
+                                name="name"
+                                value={editedUser?.name || ""}
+                                onChange={handleChange}
+                            />
                         </label>
                         <label>
-                            Email: <input name="email" value={editedUser?.email || ""} onChange={handleChange} />
+                            Email:
+                            <input
+                                name="email"
+                                value={editedUser?.email || ""}
+                                onChange={handleChange}
+                            />
                         </label>
                         <label>
-                            Role: <input name="role" value={editedUser?.role || ""} onChange={handleChange} />
+                            Role:
+                            <input
+                                name="role"
+                                value={editedUser?.role || ""}
+                                onChange={handleChange}
+                            />
                         </label>
                         <label>
-                            Department: <input name="department" value={editedUser?.department || ""} onChange={handleChange} />
+                            Department:
+                            <input
+                                name="department"
+                                value={editedUser?.department || ""}
+                                onChange={handleChange}
+                            />
                         </label>
                         <label>
-                            Join Date: <input name="joinDate" value={editedUser?.joinDate || ""} onChange={handleChange} />
+                            Join Date:
+                            <input
+                                name="joinDate"
+                                value={editedUser?.joinDate || ""}
+                                onChange={handleChange}
+                            />
                         </label>
                         <label>
-                            Status: <input name="status" value={editedUser?.status || ""} onChange={handleChange} />
+                            Status:
+                            <input
+                                name="status"
+                                value={editedUser?.status || ""}
+                                onChange={handleChange}
+                            />
                         </label>
                         {editedUser?.score !== undefined && (
                             <label>
-                                Score: <input name="score" type="number" value={editedUser.score} onChange={handleChange} />
+                                Score:
+                                <input
+                                    name="score"
+                                    type="number"
+                                    value={editedUser.score}
+                                    onChange={handleChange}
+                                />
                             </label>
                         )}
                         <div className="profile-buttons">
@@ -121,10 +196,6 @@ const Profile = () => {
                                 <tr>
                                     <th>Status:</th>
                                     <td>{user.status || "N/A"}</td>
-                                </tr>
-                                <tr>
-                                    <th>Update Image:</th>
-                                    <td>{user.name || "N/A"}</td>
                                 </tr>
                                 {user.score !== undefined && (
                                     <tr>
