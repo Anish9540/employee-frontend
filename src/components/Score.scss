@@ -1,15 +1,15 @@
 .profile-page {
-    max-width: 800px;
-    margin: 1.5rem auto;
+    max-width: 1200px;
+    margin: 2rem auto;
     padding: 1.5rem;
     background-color: #fdfdfd;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 .profile-heading {
-    font-size: 1.6rem;
-    margin-bottom: 1.4rem;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
     text-align: center;
     color: #2c3e50;
 }
@@ -32,14 +32,42 @@
     }
 }
 
-.performance-metrics {
-    margin-top: 2rem;
+.layout-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
 
+.left-section {
+    flex: 1;
+    min-width: 350px;
+}
+
+.right-section {
+    flex: 1;
+    min-width: 500px;
+}
+
+.performance-metrics {
     h3 {
         font-size: 1.4rem;
         margin-bottom: 1rem;
         color: #2c3e50;
         text-align: center;
+    }
+
+    input {
+        margin-left: 0.5rem;
+        padding: 0.4rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 60%;
+        font-size: 0.9rem;
+    }
+
+    p {
+        margin: 0.5rem 0;
+        font-size: 0.95rem;
     }
 }
 
@@ -51,7 +79,6 @@
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
-    // text-align: left;
     text-align: center;
 
     thead {
@@ -61,7 +88,6 @@
             color: #fff;
             padding: 0.7rem 1rem;
             font-size: 0.95rem;
-            text-align: center;
         }
     }
 
@@ -83,8 +109,8 @@
 }
 
 .profile-buttons {
-    margin-top: 1.8rem;
     text-align: center;
+    margin-top: 1rem;
 
     button {
         padding: 0.5rem 1rem;
@@ -101,4 +127,8 @@
             background-color: #2980b9;
         }
     }
+}
+
+.top-margin {
+    margin-top: 1.5rem;
 }
