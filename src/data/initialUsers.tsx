@@ -20,7 +20,7 @@ export type PerformanceMetrics = {
 };
 
 export type User = {
-    id: number;
+    id: number | string;
     name: string;
     img: string;
     email: string;
@@ -35,7 +35,7 @@ export type User = {
 
 export const initialUsers: User[] = [
     {
-        id: 1,
+        id: "BOTP Employee",
         name: "Alice Johnson",
         img: "https://www.thefamouspeople.com/profiles/images/elon-musk-1.jpg",
         email: "alice.johnson@example.com",
@@ -67,13 +67,13 @@ export const initialUsers: User[] = [
         },
     },
     {
-        id: 2,
+        id: "BOTP Employee",
         name: "Bob Williams",
         img: "https://www.thefamouspeople.com/profiles/images/elon-musk-1.jpg",
         email: "bob.williams@example.com",
         password: "securepass456",
         role: "BOTP Employee",
-        status: "Completed",
+        status: "In_Progress",
         score: 75,
         department: "Technical Support",
         joinDate: "2023-01-10",
@@ -99,13 +99,13 @@ export const initialUsers: User[] = [
         },
     },
     {
-        id: 3,
+        id: 'Manager',
         name: "Emma Wilson",
         img: "https://www.thefamouspeople.com/profiles/images/elon-musk-1.jpg",
         email: "emma.wilson@example.com",
         password: "managerpass789",
         role: "Manager",
-        status: "To_Start",
+        status: "Completed",
         department: "Operations",
         joinDate: "2020-08-22",
         performanceMetrics: {

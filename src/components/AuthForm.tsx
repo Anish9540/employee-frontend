@@ -8,15 +8,18 @@ import "./AuthForm.scss";
 interface FormData {
     email: string;
     password: string;
+    confirmPassword?: string;
 }
 
 const AuthForm = () => {
     const [formData, setFormData] = useState<FormData>({
-        email: "alice.johnson@example.com",
+        email: "",
         password: "",
+        confirmPassword: "",
     });
     const [errors, setErrors] = useState<Partial<FormData>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [mode, setMode] = useState<"login" | "signup">("login");
 
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
@@ -31,39 +34,56 @@ const AuthForm = () => {
 
     const validate = () => {
         const newErrors: Partial<FormData> = {};
+
         if (!formData.email) newErrors.email = "Email is required.";
         else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid.";
+
         if (!formData.password) newErrors.password = "Password is required.";
+
+        if (mode === "signup") {
+            if (!formData.confirmPassword) newErrors.confirmPassword = "Confirm password is required.";
+            else if (formData.password !== formData.confirmPassword)
+                newErrors.confirmPassword = "Passwords do not match.";
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-        if (errors[e.target.name as keyof FormData]) {
-            setErrors({ ...errors, [e.target.name]: undefined });
-        }
-    };
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
 
-    const resetForm = () => {
-        setFormData({ email: "", password: "" });
-        setErrors({});
+        if (errors[name as keyof FormData]) {
+            setErrors({ ...errors, [name]: undefined });
+        }
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (validate()) {
-            setIsSubmitting(true);
-            dispatch(login(formData));
-            setIsSubmitting(false);
+        if (!validate()) return;
+
+        setIsSubmitting(true);
+        if (mode === "login") {
+            dispatch(login({ email: formData.email, password: formData.password }));
+        } else {
+            // Here you'd normally dispatch a signup action
+            console.log("Signup data:", formData); // Placeholder
         }
+        setIsSubmitting(false);
+    };
+
+    const toggleMode = () => {
+        setMode(mode === "login" ? "signup" : "login");
+        setFormData({ email: "", password: "", confirmPassword: "" });
+        setErrors({});
     };
 
     return (
         <div className="auth-form-wrapper">
             <div className="auth-form">
-                <h2>Login</h2>
+                <h2>{mode === "login" ? "Login" : "Sign Up"}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label>Email</label>
@@ -87,12 +107,36 @@ const AuthForm = () => {
                         {errors.password && <span className="error">{errors.password}</span>}
                     </div>
 
+                    {mode === "signup" && (
+                        <div className="input-group">
+                            <label>Confirm Password</label>
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
+                            />
+                            {errors.confirmPassword && (
+                                <span className="error">{errors.confirmPassword}</span>
+                            )}
+                        </div>
+                    )}
+
                     <button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? "Logging in..." : "Login"}
+                        {isSubmitting
+                            ? mode === "login" ? "Logging in..." : "Signing up..."
+                            : mode === "login" ? "Login" : "Sign Up"}
                     </button>
 
-                    {error && <div className="error">{error}</div>}
+                    {mode === "login" && error && <div className="error">{error}</div>}
                 </form>
+
+                <p className="toggle-mode">
+                    {mode === "login" ? "Don't have an account?" : "Already have an account?"}{" "}
+                    <span onClick={toggleMode} className="link">
+                        {mode === "login" ? "Sign Up" : "Login"}
+                    </span>
+                </p>
             </div>
         </div>
     );
