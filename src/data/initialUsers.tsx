@@ -46,10 +46,6 @@ export const initialUsers: User[] = [
         department: "Customer Support",
         joinDate: "2022-05-15",
         performanceMetrics: {
-            // callsHandled: 245,
-            // customerSatisfaction: 92,
-            // responseTime: "1.5 min",
-            // closedTickets: 198,
             leetcodeScore: 1200,
             hackerrankScore: 1500,
             week1Score: 80,
@@ -78,10 +74,6 @@ export const initialUsers: User[] = [
         department: "Technical Support",
         joinDate: "2023-01-10",
         performanceMetrics: {
-            // callsHandled: 187,
-            // customerSatisfaction: 85,
-            // responseTime: "2.1 min",
-            // closedTickets: 163,
             leetcodeScore: 1100,
             hackerrankScore: 1400,
             week1Score: 75,
