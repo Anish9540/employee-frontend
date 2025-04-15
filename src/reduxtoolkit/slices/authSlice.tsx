@@ -1,51 +1,53 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User, initialUsers } from "../../data/initialUsers";
+
+interface User {
+    id: string;
+    email: string;
+    name: string;
+    token: string;
+    img?: string;
+    role?: string;
+    department?: string;
+    joinDate?: string;
+    status?: string;
+    score?: number;
+}
 
 interface AuthState {
     currentUser: User | null;
-    error: string | null;
+    isAuthenticated: boolean;
 }
 
 const initialState: AuthState = {
-    currentUser: JSON.parse(localStorage.getItem("currentUser") || "null"),
-    error: null,
+    currentUser: null,
+    isAuthenticated: false,
 };
 
-interface LoginPayload {
-    email: string;
-    password: string;
-}
-
-export const authSlice = createSlice({
+const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        login: (state, action: PayloadAction<LoginPayload>) => {
-            const { email, password } = action.payload;
-            const user = initialUsers.find(
-                (u) => u.email === email && u.password === password
-            );
-            if (user) {
-                state.currentUser = user;
-                state.error = null;
-                localStorage.setItem("currentUser", JSON.stringify(user));
-            } else {
-                state.currentUser = null;
-                state.error = "Invalid credentials";
-                localStorage.removeItem("currentUser");
-            }
+        updateUser: (state, action: PayloadAction<User>) => {
+            console.log("Updating user:", action.payload);
+            state.currentUser = action.payload;
+            state.isAuthenticated = true;
         },
         logout: (state) => {
             state.currentUser = null;
-            state.error = null;
-            localStorage.removeItem("currentUser");
-        },
-        updateUser: (state, action: PayloadAction<User>) => {
-            state.currentUser = action.payload;
-            localStorage.setItem("currentUser", JSON.stringify(action.payload));
+            state.isAuthenticated = false;
         },
     },
 });
 
-export const { login, logout, updateUser } = authSlice.actions;
+export const { updateUser, logout } = authSlice.actions;
 export default authSlice.reducer;
+
+
+
+
+
+
+
+
+
+

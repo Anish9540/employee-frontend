@@ -1,67 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../reduxtoolkit/store/store";
-import { updateUser } from "../reduxtoolkit/slices/authSlice";
 import "./Profile.scss";
+import { useSelector } from 'react-redux';
+import { RootState } from '../reduxtoolkit/store/store';
 
 const Profile = () => {
-    const dispatch = useDispatch();
-    const user = useSelector((state: RootState) => state.auth.currentUser);
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedUser, setEditedUser] = useState(user);
+    const { currentUser, isAuthenticated } = useSelector((state: RootState) => state.auth);
+    console.log(currentUser)
+    console.log(currentUser?.name)
 
-    useEffect(() => {
-        const storedUser = localStorage.getItem("currentUser");
-        if (storedUser) {
-            const parsedUser = JSON.parse(storedUser);
-            setEditedUser(parsedUser);
-            dispatch(updateUser(parsedUser));
-        }
-    }, [dispatch]);
-
-    const handleEditToggle = () => {
-        setIsEditing(!isEditing);
-    };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (editedUser) {
-            const { name, value } = e.target;
-            setEditedUser({
-                ...editedUser,
-                [name]: value,
-            });
-        }
-    };
-
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file && (file.type === "image/png" || file.type === "image/jpeg")) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setEditedUser((prevUser) => {
-                    if (!prevUser) return null;
-                    return {
-                        ...prevUser,
-                        img: reader.result as string,
-                    };
-                });
-            };
-            reader.readAsDataURL(file);
-        } else {
-            alert("Only PNG and JPG files are allowed.");
-        }
-    };
-
-    const handleSave = () => {
-        if (editedUser) {
-            localStorage.setItem("currentUser", JSON.stringify(editedUser));
-            dispatch(updateUser(editedUser));
-            setIsEditing(false);
-        }
-    };
-
-    if (!user) {
-        return <div className="profile-page">No user logged in.</div>;
+    if (!isAuthenticated) {
+        return <div>Please log in to see your profile.</div>;
     }
 
     return (
@@ -70,146 +17,43 @@ const Profile = () => {
             <div className="profile-info">
                 <div className="profile-image-container">
                     <img
-                        src={
-                            isEditing
-                                ? editedUser?.img || "/default-avatar.png"
-                                : user.img || "/default-avatar.png"
-                        }
+                        src={currentUser?.img || 'default-image-url'}
                         alt="Profile"
                         className="profile-image"
                     />
                 </div>
-
-                {isEditing ? (
-                    <>
-                        <label>
-                            Upload Image:
-                            <input
-                                type="file"
-                                accept="image/png, image/jpeg"
-                                onChange={handleImageUpload}
-                            />
-                        </label>
-                        {editedUser?.img && (
-                            <img
-                                src={editedUser.img}
-                                alt="Preview"
-                                className="profile-image preview"
-                            />
-                        )}
-                        <label>
-                            Username:
-                            <input
-                                name="username"
-                                value={editedUser?.name || ""}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Name:
-                            <input
-                                name="name"
-                                value={editedUser?.name || ""}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Email:
-                            <input
-                                name="email"
-                                value={editedUser?.email || ""}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Role:
-                            <input
-                                name="role"
-                                value={editedUser?.role || ""}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Department:
-                            <input
-                                name="department"
-                                value={editedUser?.department || ""}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Join Date:
-                            <input
-                                name="joinDate"
-                                value={editedUser?.joinDate || ""}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Status:
-                            <input
-                                name="status"
-                                value={editedUser?.status || ""}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        {editedUser?.score !== undefined && (
-                            <label>
-                                Score:
-                                <input
-                                    name="score"
-                                    type="number"
-                                    value={editedUser.score}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                        )}
-                        <div className="profile-buttons">
-                            <button onClick={handleSave}>Save</button>
-                            <button onClick={handleEditToggle}>Cancel</button>
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <table className="profile-table">
-                            <tbody>
-                                <tr>
-                                    <th>Name:</th>
-                                    <td>{user.name}</td>
-                                </tr>
-                                <tr>
-                                    <th>Email:</th>
-                                    <td>{user.email}</td>
-                                </tr>
-                                <tr>
-                                    <th>Role:</th>
-                                    <td>{user.role}</td>
-                                </tr>
-                                <tr>
-                                    <th>Department:</th>
-                                    <td>{user.department}</td>
-                                </tr>
-                                <tr>
-                                    <th>Join Date:</th>
-                                    <td>{user.joinDate}</td>
-                                </tr>
-                                <tr>
-                                    <th>Status:</th>
-                                    <td>{user.status || "N/A"}</td>
-                                </tr>
-                                {user.score !== undefined && (
-                                    <tr>
-                                        <th>Score:</th>
-                                        <td>{user.score}</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                        <div className="profile-buttons">
-                            <button onClick={handleEditToggle}>Edit Profile</button>
-                        </div>
-                    </>
-                )}
+                <table className="profile-table">
+                    <tbody>
+                        <tr>
+                            <th>Name:</th>
+                            <td>{currentUser?.name || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{currentUser?.email || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <th>Role:</th>
+                            <td>{currentUser?.role || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <th>Department:</th>
+                            <td>{currentUser?.department || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <th>Join Date:</th>
+                            <td>{currentUser?.joinDate || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td>{currentUser?.status || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <th>Score:</th>
+                            <td>{currentUser?.score || 'N/A'}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     );

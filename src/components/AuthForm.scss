@@ -38,7 +38,8 @@
                     color: #374151;
                 }
 
-                input {
+                input,
+                select {
                     padding: 0.75rem;
                     font-size: 1rem;
                     border: 1px solid #d1d5db;
@@ -49,6 +50,17 @@
                         border-color: #6366f1;
                         outline: none;
                     }
+                }
+
+                select {
+                    appearance: none; // Remove default dropdown arrow
+                    background-color: #ffffff;
+                    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path d="M3 4l3 3 3-3" fill="none" stroke="#4b5563" stroke-width="1.5"/></svg>');
+                    background-repeat: no-repeat;
+                    background-position: right 0.75rem center;
+                    background-size: 12px;
+                    padding-right: 2rem;
+                    cursor: pointer;
                 }
 
                 .error {
