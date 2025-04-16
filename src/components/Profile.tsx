@@ -1,11 +1,15 @@
 import "./Profile.scss";
 import { useSelector } from 'react-redux';
 import { RootState } from '../reduxtoolkit/store/store';
+import { useEffect } from "react";
 
 const Profile = () => {
     const { currentUser, isAuthenticated } = useSelector((state: RootState) => state.auth);
-    console.log(currentUser)
-    console.log(currentUser?.name)
+
+    // Log the currentUser whenever it changes
+    useEffect(() => {
+        console.log("Updated in Profile:", currentUser);
+    }, [currentUser]);  // This will log whenever currentUser updates
 
     if (!isAuthenticated) {
         return <div>Please log in to see your profile.</div>;
@@ -60,3 +64,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

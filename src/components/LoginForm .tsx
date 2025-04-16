@@ -18,7 +18,7 @@ const LoginForm = () => {
     const [errors, setErrors] = useState<Partial<FormData>>({});
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const isSubmitted = useRef(false);
+    // const isSubmitted = useRef(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
