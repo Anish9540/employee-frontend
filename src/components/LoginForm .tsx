@@ -56,6 +56,8 @@ const LoginForm = () => {
             const response = await axios.post("http://localhost:35000/api/auth/login", {
                 email: formData.email,
                 password: formData.password
+            }, {
+                withCredentials: true, // Add this line
             });
 
             // Dispatch user data to Redux store

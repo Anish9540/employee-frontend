@@ -1,81 +1,3 @@
-// import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-
-// export type PerformanceMetrics = {
-//     callsHandled?: number;
-//     customerSatisfaction?: number;
-//     responseTime?: string;
-//     closedTickets?: number;
-//     leetcodeScore?: number;
-//     hackerrankScore?: number;
-//     week1Score?: number;
-//     week2Score?: number;
-//     week3Score?: number;
-//     assignment1Percentage?: number;
-//     assignment2Percentage?: number;
-//     assignment3Percentage?: number;
-//     EFTestScore?: number;
-//     learningCertificatesDone?: string[];
-//     coursesCompleted?: string[];
-//     mockEvaluation1Score?: number;
-//     mockEvaluation2Score?: number;
-//     mockEvaluation3Score?: number;
-// };
-
-// export type User = {
-//     id: number | string;
-//     name: string;
-//     img: string;
-//     email: string;
-//     password: string;
-//     role: string;
-//     status: string;
-//     score?: number;
-//     department: string;
-//     joinDate: string;
-//     performanceMetrics?: PerformanceMetrics;
-//     username?: string;
-//     token: string;
-// };
-
-// interface AuthState {
-//     currentUser: User | null;
-//     isAuthenticated: boolean;
-// }
-
-// const initialState: AuthState = {
-//     currentUser: null,
-//     isAuthenticated: false,
-// };
-
-// const authSlice = createSlice({
-//     name: "auth",
-//     initialState,
-//     reducers: {
-//         updateUser: (state, action: PayloadAction<User>) => {
-//             console.log("Updating user:", action.payload);
-//             state.currentUser = action.payload;
-//             state.isAuthenticated = true;
-//         },
-//         logout: (state) => {
-//             state.currentUser = null;
-//             state.isAuthenticated = false;
-//         },
-//     },
-// });
-
-// export const { updateUser, logout } = authSlice.actions;
-// export default authSlice.reducer;
-
-
-
-
-
-
-
-
-
-
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // Define the structure of the performance metrics data
@@ -102,6 +24,7 @@ export type PerformanceMetrics = {
 
 // Define the user type, as per the structure you have
 export type User = {
+    _id: string;
     id: number | string;
     name: string;
     img: string;
@@ -156,3 +79,4 @@ const authSlice = createSlice({
 
 export const { updateUser, logout } = authSlice.actions;
 export default authSlice.reducer;
+
