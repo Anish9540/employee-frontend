@@ -1,48 +1,3 @@
-// import { Link, useNavigate } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import { logout } from "../reduxtoolkit/slices/authSlice";
-// import { RootState } from "../reduxtoolkit/store/store";
-// import "./Navbar.scss";
-
-// const Navbar = () => {
-//     const dispatch = useDispatch();
-//     const navigate = useNavigate();
-
-//     const user = useSelector((state: RootState) => state.auth.currentUser);
-
-//     const handleLogout = () => {
-//         dispatch(logout());
-//         navigate("/");
-//     };
-
-//     return (
-//         <header className="navbar">
-//             <div className="nav-left">
-//                 <Link to="/dashboard" className="nav-item">Dashboard</Link>
-//                 <Link to="/dashboard/profile" className="nav-item">Profile</Link>
-//                 <Link to="/dashboard/score" className="nav-item">Score</Link>
-//             </div>
-//             <div className="nav-right">
-//                 <img
-//                     src={user?.img}
-//                     alt="img"
-//                     className="user-image"
-//                 />
-
-//                 <div className="user-status">
-//                     <h3>{user?.status}</h3>
-//                 </div>
-
-
-//                 <button className="logout-button" onClick={handleLogout}>Logout</button>
-//             </div>
-//         </header>
-//     );
-// };
-
-// export default Navbar;
-
-
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reduxtoolkit/slices/authSlice";
@@ -60,6 +15,14 @@ const Navbar = () => {
         navigate("/");
     };
 
+    // Function to get the full image URL
+    const getImageUrl = (imgPath?: string) => {
+        if (!imgPath) return "https://via.placeholder.com/100"; // fallback image
+        return imgPath.startsWith("/uploads")
+            ? `http://localhost:35000${imgPath}`
+            : imgPath;
+    };
+
     return (
         <header className="navbar">
             <div className="nav-left">
@@ -70,7 +33,7 @@ const Navbar = () => {
             <div className="nav-right">
                 <div className="user-info">
                     <img
-                        src={user?.img || 'default-image-url'}
+                        src={getImageUrl(user?.img)}
                         alt="User"
                         className="user-image"
                     />
@@ -80,7 +43,9 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <button className="logout-button" onClick={handleLogout}>Logout</button>
+                <button className="logout-button" onClick={handleLogout}>
+                    Logout
+                </button>
             </div>
         </header>
     );
