@@ -24,7 +24,7 @@ export type PerformanceMetrics = {
 
 // Define the user type, as per the structure you have
 export type User = {
-    _id: string;
+    _id?: string;
     id: number | string;
     name: string;
     img: string;
