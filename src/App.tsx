@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import AuthForm from "./components/AuthForm";
-import NavbarLayout from "./components/NavbarLayout";
-import Dashboard from "./components/Dashboard";
-import Profile from "./components/Profile";
-import Score from "./components/Score ";
-import ProtectedRoute from "./components/ProtectedRoute"; // <- import
+import AuthForm from "./components/AuthForm/AuthForm";
+import NavbarLayout from "./components/Navbar/NavbarLayout";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Profile from "./components/Profile/Profile";
+import Score from "./components/Score/Score ";
+import ProtectedRoute from "./components/Routes/ProtectedRoute"; // <- import
 
 const App = () => {
   return (

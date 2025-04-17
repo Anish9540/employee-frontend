@@ -1,9 +1,9 @@
 import "./Profile.scss";
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../reduxtoolkit/store/store';
+import { RootState } from '../../reduxtoolkit/store/store';
 import { useEffect, useState } from "react";
-import { updateUser } from '../reduxtoolkit/slices/authSlice';
-import { User } from '../reduxtoolkit/slices/authSlice';
+import { updateUser } from '../../reduxtoolkit/slices/authSlice';
+import { User } from '../../reduxtoolkit/slices/authSlice';
 import axios from "axios";
 
 const Profile = () => {
