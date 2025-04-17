@@ -5,6 +5,7 @@ import axios from "axios";
 import { updateUser } from "../../../reduxtoolkit/slices/authSlice";
 import { RootState } from "../../../reduxtoolkit/store/store";
 import "./LoginForm.scss";
+import cg from "../../../Utils/cg.png";
 
 interface FormData {
     email: string;
@@ -73,7 +74,6 @@ const LoginForm = () => {
     };
 
     useEffect(() => {
-        // If user is authenticated, redirect to dashboard
         if (isAuthenticated && currentUser) {
             navigate("/dashboard");
         }
@@ -81,10 +81,9 @@ const LoginForm = () => {
 
     return (
         <div className="login-container">
-            {/* Static image and title */}
             <div className="login-header">
-                <img src="/assets/logo.png" alt="App Logo" className="login-logo" />
-                <h1 className="login-title">Welcome Back</h1>
+                <img src={cg} alt="App Logo" className="login-logo" />
+                <h1 className="login-title">BOTP Application</h1>
             </div>
 
             <form onSubmit={handleSubmit} className="login-form">
@@ -95,6 +94,7 @@ const LoginForm = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        placeholder="Enter your email"
                     />
                     {errors.email && <span className="error">{errors.email}</span>}
                 </div>
@@ -106,6 +106,7 @@ const LoginForm = () => {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
+                        placeholder="Enter your password"
                     />
                     {errors.password && <span className="error">{errors.password}</span>}
                 </div>

@@ -97,28 +97,80 @@ table a:hover {
     text-decoration: underline;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
+/* ========== Responsive Breakpoints ========== */
+
+/* Small devices (phones) */
+@media (max-width: 576px) {
     .dashboard-container {
         margin: 10px;
         padding: 10px;
     }
 
     .heading {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
     .subheading {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     table th,
     table td {
-        font-size: 0.9rem;
-        padding: 8px;
+        font-size: 0.85rem;
+        padding: 6px;
     }
 
     .key-contacts {
         flex-direction: column;
+    }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 577px) and (max-width: 991px) {
+    .dashboard-container {
+        margin: 15px;
+        padding: 15px;
+    }
+
+    .heading {
+        font-size: 1.6rem;
+    }
+
+    .subheading {
+        font-size: 1.3rem;
+    }
+
+    table th,
+    table td {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    .key-contacts {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .contact {
+        flex: 1 1 48%;
+    }
+}
+
+/* Large devices (desktops) */
+@media (min-width: 992px) {
+    .dashboard-container {
+        max-width: 1200px;
+        margin: 40px auto;
+    }
+
+    .key-contacts {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .contact {
+        flex: 1 1 30%;
     }
 }

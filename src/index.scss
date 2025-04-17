@@ -3,3 +3,24 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+// ========== Breakpoints ==========
+$breakpoint-sm: 576px; // Small (phones)
+$breakpoint-md: 768px; // Medium (tablets)
+$breakpoint-lg: 992px; // Large (desktops)
+
+// ========== Colors ==========
+$primary-color: #007bff;
+$primary-hover: #0056b3;
+$error-color: red;
+$button-disabled: #6c757d;
+
+// ========== Typography ==========
+$font-sm: 0.85rem;
+$font-base: 1rem;
+$font-md: 1.1rem;
+$font-lg: 1.6rem;
+
+// ========== Spacing ==========
+$padding-base: 1rem;
+$border-radius: 0.4rem;

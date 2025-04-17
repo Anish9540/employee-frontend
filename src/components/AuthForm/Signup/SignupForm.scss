@@ -1,0 +1,47 @@
+form {
+    .input-group {
+        width: 100%;
+        margin-bottom: 1.2rem;
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            text-align: left; // Align label to the left
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.4rem;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 1rem;
+
+            &:focus {
+                border-color: #28a745;
+            }
+        }
+
+        .error {
+            color: red;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+        }
+    }
+
+    button {
+        width: 100%;
+        padding: 0.6rem;
+        background-color: #007bff; // Changed to blue
+        color: white;
+        border: none;
+        border-radius: 0.4rem;
+        cursor: pointer;
+
+        &:disabled {
+            background-color: #6c757d;
+        }
+    }
+}
