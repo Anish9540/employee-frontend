@@ -37,10 +37,25 @@ const Navbar = () => {
                         className="user-image"
                     />
                     <div className="user-details">
-                        <h3>{user?.name || 'Name Not Available'}</h3>
-                        <p className="user-status">
-                            <strong>Status:</strong> {user?.status || 'Not Available'}
-                        </p>
+                        <div className="user-column">
+                            <p className="user-name">
+                                <strong>{user?.name || 'Name Not Available'}</strong>
+                            </p>
+                            <p className="user-email">
+                                <strong>Email : </strong> {user?.email || 'Not Available'}
+                            </p>
+                        </div>
+                        <div className="user-column">
+                            <p className="user-role">
+                                <strong>Role:</strong> {user?.role || 'Not Available'}
+                            </p>
+                            {/* Conditionally render the Status field */}
+                            {user?.role !== "Manager" && (
+                                <p className="user-status">
+                                    <strong>Status:</strong> {user?.status || 'Not Available'}
+                                </p>
+                            )}
+                        </div>
                     </div>
                 </div>
 
