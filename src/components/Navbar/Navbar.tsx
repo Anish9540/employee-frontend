@@ -15,9 +15,8 @@ const Navbar = () => {
         navigate("/");
     };
 
-    // Function to get the full image URL
     const getImageUrl = (imgPath?: string) => {
-        if (!imgPath) return "https://via.placeholder.com/100"; // fallback image
+        if (!imgPath) return "https://via.placeholder.com/100";
         return imgPath.startsWith("/uploads")
             ? `http://localhost:35000${imgPath}`
             : imgPath;
@@ -39,7 +38,9 @@ const Navbar = () => {
                     />
                     <div className="user-details">
                         <h3>{user?.name || 'Name Not Available'}</h3>
-                        <p className="user-status">{user?.status || 'Status Not Available'}</p>
+                        <p className="user-status">
+                            <strong>Status:</strong> {user?.status || 'Not Available'}
+                        </p>
                     </div>
                 </div>
 

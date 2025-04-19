@@ -7,7 +7,7 @@ form {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            text-align: left; // Align label to the left
+            text-align: left;
         }
 
         input,
@@ -34,7 +34,7 @@ form {
     button {
         width: 100%;
         padding: 0.6rem;
-        background-color: #007bff; // Changed to blue
+        background-color: #007bff;
         color: white;
         border: none;
         border-radius: 0.4rem;
@@ -43,5 +43,85 @@ form {
         &:disabled {
             background-color: #6c757d;
         }
+    }
+
+    // Responsive styles
+    @media (max-width: 576px) {
+
+        // Small screens (mobile)
+        .input-group {
+
+            input,
+            select {
+                font-size: 0.9rem;
+                padding: 0.4rem;
+            }
+
+            label {
+                font-size: 0.9rem;
+            }
+        }
+
+        button {
+            font-size: 0.95rem;
+        }
+    }
+
+    @media (min-width: 577px) and (max-width: 768px) {
+
+        // Medium screens (tablets)
+        .input-group {
+
+            input,
+            select {
+                font-size: 1rem;
+                padding: 0.5rem;
+            }
+
+            label {
+                font-size: 1rem;
+            }
+        }
+
+        button {
+            font-size: 1rem;
+        }
+    }
+
+    @media (min-width: 769px) {
+
+        // Large screens (desktops)
+        .input-group {
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button {
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.05rem;
+        }
+    }
+}
+
+.login-logo {
+    width: 120px;
+    height: auto;
+    margin: 0 auto 1rem auto;
+    display: block;
+    object-fit: contain;
+
+    @media (max-width: 576px) {
+        width: 100px;
+    }
+
+    @media (min-width: 577px) and (max-width: 768px) {
+        width: 110px;
+    }
+
+    @media (min-width: 769px) {
+        width: 130px;
     }
 }
