@@ -13,7 +13,6 @@
     margin-bottom: 1rem;
 }
 
-/* Section styles */
 .section {
     margin-bottom: 2rem;
 }
@@ -99,8 +98,8 @@ table a:hover {
 
 /* ========== Responsive Breakpoints ========== */
 
-/* Small devices (phones) */
-@media (max-width: 576px) {
+/* 📱 320–480px: Mobile Devices */
+@media (max-width: 480px) {
     .dashboard-container {
         margin: 10px;
         padding: 10px;
@@ -125,8 +124,8 @@ table a:hover {
     }
 }
 
-/* Medium devices (tablets) */
-@media (min-width: 577px) and (max-width: 991px) {
+/* 📲 481–768px: Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
     .dashboard-container {
         margin: 15px;
         padding: 15px;
@@ -153,15 +152,49 @@ table a:hover {
     }
 
     .contact {
-        flex: 1 1 48%;
+        flex: 1 1 100%;
     }
 }
 
-/* Large devices (desktops) */
-@media (min-width: 992px) {
+/* 💻 769–1024px: Small Screens, Laptops */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .dashboard-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .heading {
+        font-size: 1.8rem;
+    }
+
+    .subheading {
+        font-size: 1.4rem;
+    }
+
+    .key-contacts {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .contact {
+        flex: 1 1 45%;
+    }
+}
+
+/* 🖥️ 1025–1200px: Desktops, Large Screens */
+@media (min-width: 1025px) {
     .dashboard-container {
         max-width: 1200px;
         margin: 40px auto;
+    }
+
+    .heading {
+        font-size: 2rem;
+    }
+
+    .subheading {
+        font-size: 1.5rem;
     }
 
     .key-contacts {

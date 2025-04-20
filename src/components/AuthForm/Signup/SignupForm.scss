@@ -45,10 +45,8 @@ form {
         }
     }
 
-    // Responsive styles
-    @media (max-width: 576px) {
-
-        // Small screens (mobile)
+    // 📱 Mobile Devices: 320px – 480px
+    @media (max-width: 480px) {
         .input-group {
 
             input,
@@ -67,9 +65,8 @@ form {
         }
     }
 
-    @media (min-width: 577px) and (max-width: 768px) {
-
-        // Medium screens (tablets)
+    // 📲 Tablets: 481px – 768px
+    @media (min-width: 481px) and (max-width: 768px) {
         .input-group {
 
             input,
@@ -88,9 +85,24 @@ form {
         }
     }
 
-    @media (min-width: 769px) {
+    // 💻 Small screens: 769px – 1024px
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .input-group {
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-        // Large screens (desktops)
+        button {
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.05rem;
+        }
+    }
+
+    // 🖥️ Large screens: 1025px – 1200px
+    @media (min-width: 1025px) {
         .input-group {
             max-width: 500px;
             margin-left: auto;
@@ -101,11 +113,12 @@ form {
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
         }
     }
 }
 
+// Logo Responsive
 .login-logo {
     width: 120px;
     height: auto;
@@ -113,15 +126,19 @@ form {
     display: block;
     object-fit: contain;
 
-    @media (max-width: 576px) {
+    @media (max-width: 480px) {
         width: 100px;
     }
 
-    @media (min-width: 577px) and (max-width: 768px) {
+    @media (min-width: 481px) and (max-width: 768px) {
         width: 110px;
     }
 
-    @media (min-width: 769px) {
+    @media (min-width: 769px) and (max-width: 1024px) {
+        width: 125px;
+    }
+
+    @media (min-width: 1025px) {
         width: 130px;
     }
 }

@@ -9,7 +9,6 @@
     flex-wrap: wrap;
 }
 
-/* Left part of the navbar */
 .nav-left {
     display: flex;
     align-items: center;
@@ -20,30 +19,16 @@
         color: #333;
         font-weight: 600;
         font-size: 18px;
-        /* Increased font size for better visibility */
-        transition: color 0.3s ease;
         padding: 8px 16px;
-        /* Increased padding for better spacing */
+        transition: color 0.3s ease;
     }
 
     .nav-item:hover {
         color: #007bff;
     }
-
-    @media (max-width: 768px) {
-        width: 100%;
-        margin-bottom: 10px;
-        justify-content: center;
-
-        .nav-item {
-            margin-right: 15px;
-            font-size: 16px;
-            /* Slightly smaller font on smaller screens */
-        }
-    }
 }
 
-/* Right part of the navbar */
+/* ===== Right Section ===== */
 .nav-right {
     display: flex;
     align-items: center;
@@ -53,23 +38,22 @@
         display: flex;
         align-items: center;
         margin-right: 20px;
+        gap: 15px;
+        /* Increased gap for spacing */
     }
 
     .user-image {
-        width: 60px;
-        /* Increased size */
-        height: 60px;
-        /* Increased size */
+        width: 70px;
+        /* Slightly bigger image */
+        height: 70px;
         border-radius: 50%;
         object-fit: cover;
-        margin-right: 15px;
     }
 
     .user-details {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-right: 20px;
     }
 
     .user-name {
@@ -79,15 +63,16 @@
         color: #333;
     }
 
+    .user-email,
+    .user-role,
     .user-status {
         font-size: 14px;
+        margin: 2px 0;
         color: #000;
-        /* Black text for both label and value */
-        margin-top: 4px;
+    }
 
-        strong {
-            color: #000;
-        }
+    strong {
+        color: #000;
     }
 
     .logout-button {
@@ -99,57 +84,122 @@
         font-size: 14px;
         border-radius: 4px;
         transition: background-color 0.3s ease;
+        margin-left: 20px;
+        /* Space between name and logout button */
     }
 
     .logout-button:hover {
         background-color: #e03e3e;
     }
+}
 
-    @media (max-width: 1024px) {
-        .user-image {
-            width: 50px;
-            /* Slightly smaller for medium screens */
-            height: 50px;
-            /* Slightly smaller for medium screens */
-        }
+/* 📱 320–480px: Mobile */
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
 
-        .user-name {
-            font-size: 16px;
-        }
+    .nav-left {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px;
 
-        .user-status {
-            font-size: 12px;
+        .nav-item {
+            font-size: 14px;
+            margin: 5px 0;
         }
     }
 
-    @media (max-width: 768px) {
+    .nav-right {
+        width: 100%;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         text-align: center;
 
         .user-info {
+            flex-direction: column;
+            align-items: center;
             margin-bottom: 10px;
-            margin-right: 0;
-        }
-
-        .logout-button {
-            margin-top: 10px;
         }
 
         .user-image {
             width: 70px;
-            /* Increased size for smaller screens */
             height: 70px;
-            /* Increased size for smaller screens */
+            margin-bottom: 10px;
         }
 
-        .user-name {
+        .user-details {
+            align-items: center;
+
+            .user-name,
+            .user-email,
+            .user-role,
+            .user-status {
+                font-size: 14px;
+                margin: 4px 0;
+            }
+        }
+
+        .logout-button {
+            padding: 6px 12px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    }
+}
+
+/* 📲 481–768px: Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 15px;
+    }
+
+    .nav-left {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .nav-item {
             font-size: 16px;
+            margin: 6px 0;
+        }
+    }
+
+    .nav-right {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .user-info {
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
         }
 
-        .user-status {
-            font-size: 14px;
+        .user-image {
+            width: 80px;
+            /* Larger image for tablets */
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .user-details {
+            align-items: center;
+
+            .user-name,
+            .user-email,
+            .user-role,
+            .user-status {
+                font-size: 15px;
+                margin: 4px 0;
+            }
         }
 
         .logout-button {
@@ -158,38 +208,22 @@
             margin-top: 10px;
         }
     }
-
-    @media (max-width: 480px) {
-        .user-image {
-            width: 50px;
-            /* Increased size for very small screens */
-            height: 50px;
-            /* Increased size for very small screens */
-        }
-
-        .user-name {
-            font-size: 14px;
-        }
-
-        .user-status {
-            font-size: 12px;
-        }
-
-        .logout-button {
-            padding: 6px 12px;
-            font-size: 12px;
-        }
-    }
 }
 
-@media (max-width: 1024px) {
+/* 💻 769–1024px: Small Screens, Laptops */
+@media (min-width: 769px) and (max-width: 1024px) {
     .navbar {
-        padding: 10px 15px;
+        padding: 10px 20px;
     }
 
     .nav-item {
         font-size: 16px;
-        /* Increased font size for medium screens */
+    }
+
+    .user-image {
+        width: 60px;
+        /* Slightly smaller for laptops */
+        height: 60px;
     }
 
     .user-name {
@@ -199,82 +233,12 @@
     .user-status {
         font-size: 12px;
     }
-
-    .user-image {
-        width: 50px;
-        height: 50px;
-    }
 }
 
-@media (max-width: 768px) {
+/* 🖥️ 1025–1200px: Desktops */
+@media (min-width: 1025px) and (max-width: 1200px) {
     .navbar {
-        padding: 10px 10px;
-    }
-
-    .nav-left {
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 15px;
-        width: 100%;
-        justify-content: center;
-
-        .nav-item {
-            margin-bottom: 10px;
-            font-size: 18px;
-            /* Larger font size for small screens */
-        }
-    }
-
-    .nav-right {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .user-image {
-        width: 70px;
-        /* Increased size for smaller screens */
-        height: 70px;
-        /* Increased size for smaller screens */
-    }
-
-    .user-name {
-        font-size: 16px;
-    }
-
-    .user-status {
-        font-size: 14px;
-    }
-
-    .logout-button {
-        padding: 8px 16px;
-        font-size: 14px;
-        margin-top: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-item {
-        font-size: 14px;
-        /* Slightly smaller font for very small screens */
-    }
-
-    .user-name {
-        font-size: 14px;
-    }
-
-    .user-status {
-        font-size: 12px;
-    }
-
-    .user-image {
-        width: 50px;
-        height: 50px;
-    }
-
-    .logout-button {
-        padding: 6px 12px;
-        font-size: 12px;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 }

@@ -2,77 +2,115 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+    padding: 1rem;
 
-.login-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
+    .login-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
 
-    .login-logo {
-        width: 60px;
-        margin-bottom: 0.5rem;
-    }
-
-    .login-title {
-        font-size: 1.8rem;
-        color: #333;
-    }
-}
-
-.login-form {
-    width: 100%;
-    max-width: 400px; // keeps the form a nice size
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; // <-- aligns everything left
-
-    .input-group {
-        width: 100%;
-        margin-bottom: 1rem;
-
-        label {
-            display: block;
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-            text-align: left;
+        .login-logo {
+            width: 60px;
+            margin-bottom: 0.5rem;
         }
 
-        input {
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 0.4rem;
-            border: 1px solid #ccc;
-            outline: none;
+        .login-title {
+            font-size: 1.8rem;
+            color: #333;
+        }
+    }
 
-            &:focus {
-                border-color: #007bff;
+    .login-form {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 1rem;
+
+            label {
+                display: block;
+                margin-bottom: 0.4rem;
+                font-weight: 600;
+                text-align: left;
+            }
+
+            input {
+                width: 100%;
+                padding: 0.5rem;
+                border-radius: 0.4rem;
+                border: 1px solid #ccc;
+                outline: none;
+
+                &:focus {
+                    border-color: #007bff;
+                }
+            }
+
+            .error {
+                color: red;
+                font-size: 0.85rem;
+                margin-top: 0.2rem;
             }
         }
 
-        .error {
+        button {
+            align-self: stretch;
+            padding: 0.6rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 0.4rem;
+            cursor: pointer;
+
+            &:disabled {
+                background-color: #6c757d;
+            }
+        }
+
+        .error-message {
             color: red;
-            font-size: 0.85rem;
-            margin-top: 0.2rem;
+            margin-top: 1rem;
+            text-align: left;
         }
     }
 
-    button {
-        align-self: stretch; // makes the button full width of the form
-        padding: 0.6rem;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 0.4rem;
-        cursor: pointer;
+    // Responsive styles
+    @media (max-width: 480px) {
+        .login-header .login-title {
+            font-size: 1.4rem;
+        }
 
-        &:disabled {
-            background-color: #6c757d;
+        .login-header .login-logo {
+            width: 50px;
+        }
+
+        .login-form {
+            max-width: 100%;
         }
     }
 
-    .error-message {
-        color: red;
-        margin-top: 1rem;
-        text-align: left;
+    @media (min-width: 481px) and (max-width: 768px) {
+        .login-form {
+            max-width: 90%;
+        }
+
+        .login-header .login-title {
+            font-size: 1.6rem;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .login-form {
+            max-width: 380px;
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .login-form {
+            max-width: 400px;
+        }
     }
 }

@@ -2,38 +2,79 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: #f5f7fa;
+    height: 100vh;
+    padding: 10px;
 }
 
 .auth-form {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    max-width: 90%;
-    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    /* Default width for larger screens */
 
     h2 {
-        margin-bottom: 1.5rem;
-        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
     .toggle-mode {
-        margin-top: 1rem;
-        font-size: 0.95rem;
-        color: #555;
+        text-align: center;
+        margin-top: 20px;
+    }
 
-        .link {
-            color: #007bff;
-            cursor: pointer;
-            margin-left: 0.25rem;
-            text-decoration: underline;
+    .link {
+        color: #007bff;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
 
-            &:hover {
-                color: #0056b3;
-            }
-        }
+/* Mobile (320px — 480px) */
+@media (max-width: 480px) {
+    .auth-form {
+        padding: 15px;
+        max-width: 90%;
+        /* Adjust width for smaller screens */
+    }
+
+    .auth-form h2 {
+        font-size: 18px;
+        /* Smaller font size for mobile */
+    }
+}
+
+/* iPads, Tablets (481px — 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .auth-form {
+        max-width: 80%;
+    }
+
+    .auth-form h2 {
+        font-size: 20px;
+    }
+}
+
+/* Small screens, laptops (769px — 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .auth-form {
+        max-width: 70%;
+    }
+
+    .auth-form h2 {
+        font-size: 22px;
+    }
+}
+
+/* Desktops, large screens (1025px — 1200px) */
+@media (min-width: 1025px) and (max-width: 1200px) {
+    .auth-form {
+        max-width: 60%;
+    }
+
+    .auth-form h2 {
+        font-size: 24px;
     }
 }

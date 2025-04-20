@@ -337,7 +337,7 @@ const Profile = () => {
                         </tr>
                         <tr>
                             <th>Role:</th>
-                            <td>{editedUser.role || 'N/A'}</td>
+                            <td>{editedUser.roleStatus || 'N/A'}</td>
                         </tr>
                         <tr>
                             <th>Department:</th>

@@ -38,6 +38,7 @@ export type User = {
     performanceMetrics?: PerformanceMetrics;
     username?: string;
     token: string;
+    roleStatus: string
 };
 
 // Define the response type you expect from the API

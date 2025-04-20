@@ -47,10 +47,10 @@ const Navbar = () => {
                         </div>
                         <div className="user-column">
                             <p className="user-role">
-                                <strong>Role:</strong> {user?.role || 'Not Available'}
+                                <strong>Role:</strong> {user?.roleStatus || 'Not Available'}
                             </p>
                             {/* Conditionally render the Status field */}
-                            {user?.role !== "Manager" && (
+                            {user?.roleStatus !== "Manager" && (
                                 <p className="user-status">
                                     <strong>Status:</strong> {user?.status || 'Not Available'}
                                 </p>
