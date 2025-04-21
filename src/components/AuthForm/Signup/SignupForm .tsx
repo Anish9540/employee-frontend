@@ -8,14 +8,14 @@
 //     name: string;
 //     email: string;
 //     password: string;
-//     role: "" | "BOT Employee" | "Manager";
+//     roleStatus: "" | "BOTP Employee" | "Manager";
 // }
 
 // interface FormErrors {
 //     name?: string;
 //     email?: string;
 //     password?: string;
-//     role?: string;
+//     roleStatus?: string;
 // }
 
 // const SignupForm = () => {
@@ -23,13 +23,12 @@
 //         name: "",
 //         email: "",
 //         password: "",
-//         role: "",
+//         roleStatus: "",
 //     });
 
 //     const [errors, setErrors] = useState<FormErrors>({});
 //     const [isSubmitting, setIsSubmitting] = useState(false);
 //     const navigate = useNavigate();
-
 
 //     const validate = () => {
 //         const newErrors: FormErrors = {};
@@ -37,14 +36,12 @@
 //         const trimmedEmail = formData.email.trim();
 //         const password = formData.password;
 
-//         // Name validation (between 1 and 15 characters)
 //         if (!trimmedName) {
 //             newErrors.name = "Name is required.";
 //         } else if (trimmedName.length > 15) {
 //             newErrors.name = "Name must be at most 15 characters.";
 //         }
 
-//         // Email validation
 //         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 //         const afterDotCom = trimmedEmail.includes(".com")
 //             ? trimmedEmail.slice(trimmedEmail.indexOf(".com") + 4)
@@ -62,7 +59,6 @@
 //             newErrors.email = "Email must not contain any characters after '.com'.";
 //         }
 
-//         // Password validation
 //         if (!password) {
 //             newErrors.password = "Password is required.";
 //         } else if (password.length < 8) {
@@ -74,16 +70,13 @@
 //                 "Password must include uppercase, lowercase, number, and symbol.";
 //         }
 
-//         // Role validation
-//         if (!formData.role) {
-//             newErrors.role = "Role is required.";
+//         if (!formData.roleStatus) {
+//             newErrors.roleStatus = "Role is required.";
 //         }
 
 //         setErrors(newErrors);
 //         return Object.keys(newErrors).length === 0;
 //     };
-
-
 
 //     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 //         const { name, value } = e.target;
@@ -95,6 +88,7 @@
 //     };
 
 //     const handleSubmit = async (e: React.FormEvent) => {
+//         console.log('eeeeeeeeeeeeeeee', e)
 //         e.preventDefault();
 
 //         if (!validate()) return;
@@ -170,13 +164,16 @@
 
 //                 <div className="input-group">
 //                     <label>Role</label>
-//                     <select name="role" value={formData.role} onChange={handleChange}>
+//                     <select
+//                         name="roleStatus" // ✅ fixed here
+//                         value={formData.roleStatus}
+//                         onChange={handleChange}
+//                     >
 //                         <option value="">Select Role</option>
-
-//                         <option value="BOT Employee">BOT Employee</option>
+//                         <option value="BOTP Employee">BOTP Employee</option>
 //                         <option value="Manager">Manager</option>
 //                     </select>
-//                     {errors.role && <span className="error">{errors.role}</span>}
+//                     {errors.roleStatus && <span className="error">{errors.roleStatus}</span>}
 //                 </div>
 
 //                 <button type="submit" disabled={isSubmitting}>
@@ -280,9 +277,7 @@ const SignupForm = () => {
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
-        console.log('eeeeeeeeeeeeeeee', e)
         e.preventDefault();
-
         if (!validate()) return;
 
         setIsSubmitting(true);
@@ -308,70 +303,71 @@ const SignupForm = () => {
 
     return (
         <div className="signup-container">
-            <div className="botp-application">
-                <img src={cg} alt="App Logo" className="login-logo" />
-                <h2>BOTP Application</h2>
-                <p>
-                    Welcome to the BOTP application. Please fill out the form below to create
-                    your account.
-                </p>
+            <div className="signup-wrapper">
+                <div className="botp-application">
+                    <img src={cg} alt="App Logo" className="login-logo" />
+                    <h2>BOTP Application</h2>
+                    <p>
+                        Welcome to the BOTP application. Please fill out the form below to create your account.
+                    </p>
+                </div>
+
+                <form onSubmit={handleSubmit}>
+                    <div className="input-group">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Enter your name"
+                        />
+                        {errors.name && <span className="error">{errors.name}</span>}
+                    </div>
+
+                    <div className="input-group">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Enter your email"
+                        />
+                        {errors.email && <span className="error">{errors.email}</span>}
+                    </div>
+
+                    <div className="input-group">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            placeholder="Enter your password"
+                        />
+                        {errors.password && <span className="error">{errors.password}</span>}
+                    </div>
+
+                    <div className="input-group">
+                        <label>Role</label>
+                        <select
+                            name="roleStatus"
+                            value={formData.roleStatus}
+                            onChange={handleChange}
+                        >
+                            <option value="">Select Role</option>
+                            <option value="BOTP Employee">BOTP Employee</option>
+                            <option value="Manager">Manager</option>
+                        </select>
+                        {errors.roleStatus && <span className="error">{errors.roleStatus}</span>}
+                    </div>
+
+                    <button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? "Signing up..." : "Sign Up"}
+                    </button>
+                </form>
             </div>
-
-            <form onSubmit={handleSubmit}>
-                <div className="input-group">
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Enter your name"
-                    />
-                    {errors.name && <span className="error">{errors.name}</span>}
-                </div>
-
-                <div className="input-group">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Enter your email"
-                    />
-                    {errors.email && <span className="error">{errors.email}</span>}
-                </div>
-
-                <div className="input-group">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        placeholder="Enter your password"
-                    />
-                    {errors.password && <span className="error">{errors.password}</span>}
-                </div>
-
-                <div className="input-group">
-                    <label>Role</label>
-                    <select
-                        name="roleStatus" // ✅ fixed here
-                        value={formData.roleStatus}
-                        onChange={handleChange}
-                    >
-                        <option value="">Select Role</option>
-                        <option value="BOTP Employee">BOTP Employee</option>
-                        <option value="Manager">Manager</option>
-                    </select>
-                    {errors.roleStatus && <span className="error">{errors.roleStatus}</span>}
-                </div>
-
-                <button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "Signing up..." : "Sign Up"}
-                </button>
-            </form>
         </div>
     );
 };
