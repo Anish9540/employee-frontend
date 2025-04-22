@@ -1,34 +1,34 @@
 // module.exports = {
-//   preset: 'ts-jest',
-//   testEnvironment: 'jest-environment-jsdom',
-//   moduleNameMapper: {
-//     '^react-router-dom$': 'react-router-dom',
-//   },
+//   preset: 'ts-jest',  // Use ts-jest for TypeScript support
 //   transform: {
-//     '^.+\\.(ts|tsx)$': 'ts-jest',
+//     '^.+\\.(ts|tsx)$': 'ts-jest',  // Handle TypeScript files
+//     '^.+\\.(js|jsx)$': 'babel-jest',  // Use babel-jest for JS/JSX files
 //   },
-//   setupFilesAfterEnv: [
-//     '@testing-library/jest-dom'
-//   ],
 //   transformIgnorePatterns: [
-//     'node_modules/(?!(react-router-dom)/)',
+//     '/node_modules/(?!axios)/',  // Example: Ignore node_modules except Axios (if needed)
 //   ],
-//   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+//   moduleNameMapper: {
+//     '\\.(css|scss)$': 'identity-obj-proxy',  // If you're using CSS or SCSS in React components
+//   },
+//   testEnvironment: 'jsdom',  // Use jsdom for simulating a browser environment
+//   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],  // Optional: for setup code (e.g., Enzyme or other utilities)
 // };
 
 
-// jest.config.js
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
-  },
-  moduleNameMapper: {
-    '\\.(css|scss)$': 'identity-obj-proxy',
+    '^.+\\.(ts|tsx)?$': 'ts-jest',
+    '^.+\\.(js|jsx)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!axios)', // allow transforming axios if it's ESM
+    'node_modules/(?!axios)/' // Add other packages if needed
   ],
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
+    '\\.(css|less|scss)$': 'identity-obj-proxy',
+    '^axios$': require.resolve('axios'),
+  },
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };

@@ -3,8 +3,8 @@ import AuthForm from "./components/AuthForm/AuthForm";
 import NavbarLayout from "./components/Navbar/NavbarLayout";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Profile from "./components/Profile/Profile";
-import Score from "./components/Score/Score ";
-import ProtectedRoute from "./components/Routes/ProtectedRoute"; // <- import
+import Score from "./components/Score/Score";
+import ProtectedRoute from "./components/Routes/ProtectedRoute";
 
 const App = () => {
   return (
