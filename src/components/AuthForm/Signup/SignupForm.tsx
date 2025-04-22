@@ -30,6 +30,7 @@ const SignupForm = () => {
 
     const [errors, setErrors] = useState<FormErrors>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -105,16 +106,16 @@ const SignupForm = () => {
             const response = await axios.post(
                 "http://localhost:35000/api/auth/signup",
                 trimmedData,
-                { withCredentials: true } // Include HTTP-only cookie
+                { withCredentials: true }
             );
 
             const { user, message } = response.data;
-
-            // ✅ Dispatch user to Redux + persist to localStorage
             dispatch(updateUser({ user, message }));
 
-            // ✅ Redirect to dashboard
-            navigate("/dashboard");
+            setSuccessMessage("✅ Successfully Signed Up!");
+            setTimeout(() => {
+                navigate("/dashboard");
+            }, 2000);
 
         } catch (error: any) {
             console.error("Signup error:", error.response?.data || error.message);
@@ -125,6 +126,12 @@ const SignupForm = () => {
 
     return (
         <div className="signup-container">
+            {successMessage && (
+                <div className="top-success-banner">
+                    {successMessage}
+                </div>
+            )}
+
             <div className="signup-wrapper">
                 <div className="botp-application">
                     <img src={cg} alt="App Logo" className="login-logo" />

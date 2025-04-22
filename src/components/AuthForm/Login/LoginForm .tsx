@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { updateUser } from "../../../reduxtoolkit/slices/authSlice";
 import { RootState } from "../../../reduxtoolkit/store/store";
 import "./LoginForm.scss";
 import cg from "../../../Utils/cg.png";
-
 interface FormData {
     email: string;
     password: string;
