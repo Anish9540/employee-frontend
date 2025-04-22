@@ -75,22 +75,16 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        // Update user information based on the response
         updateUser: (state, action: PayloadAction<UserResponse>) => {
-            console.log("Updating user:", action.payload);
-            // Extract the user from the response and update state
+
             state.currentUser = action.payload.user;
             state.isAuthenticated = true;
-
-            // Save user to localStorage for persistence
             localStorage.setItem('currentUser', JSON.stringify(action.payload.user));
         },
-        // Logout and reset the state
+
         logout: (state) => {
             state.currentUser = null;
             state.isAuthenticated = false;
-
-            // Remove user from localStorage on logout
             localStorage.removeItem('currentUser');
         },
     },

@@ -78,8 +78,8 @@ const Profile = () => {
                 errors[name] = "Department is required.";
             } else if (value.trim().length < 2) {
                 errors[name] = "Department must be at least 2 characters.";
-            } else if (value.trim().length > 50) {
-                errors[name] = "Department cannot exceed 50 characters.";
+            } else if (value.trim().length > 20) {
+                errors[name] = "Department cannot exceed 20 characters.";
             } else if (!/^[a-zA-Z0-9\s&-]+$/.test(value)) {
                 errors[name] = "Department can only contain letters, numbers, spaces, ampersands, and hyphens.";
             } else {
@@ -102,8 +102,8 @@ const Profile = () => {
             errors.name = "Name is required.";
         } else if (user.name.trim().length < 2) {
             errors.name = "Name must be at least 2 characters.";
-        } else if (user.name.trim().length > 30) {
-            errors.name = "Name cannot exceed 30 characters.";
+        } else if (user.name.trim().length > 20) {
+            errors.name = "Name cannot exceed 20 characters.";
         } else if (!/^[a-zA-Z\s'-]+$/.test(user.name)) {
             errors.name = "Name can only contain letters, spaces, hyphens, and apostrophes.";
         }
@@ -113,8 +113,8 @@ const Profile = () => {
             errors.email = "Email is required.";
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
             errors.email = "Enter a valid email address.";
-        } else if (user.email.length > 50) {
-            errors.email = "Email cannot exceed 50 characters.";
+        } else if (user.email.length > 20) {
+            errors.email = "Email cannot exceed 20 characters.";
         } else {
             // Check for extension length (characters after the last dot)
             const extension = user.email.substring(user.email.lastIndexOf('.') + 1);
@@ -128,8 +128,8 @@ const Profile = () => {
             errors.department = "Department is required.";
         } else if (user.department.trim().length < 2) {
             errors.department = "Department must be at least 2 characters.";
-        } else if (user.department.trim().length > 50) {
-            errors.department = "Department cannot exceed 50 characters.";
+        } else if (user.department.trim().length > 20) {
+            errors.department = "Department cannot exceed 20 characters.";
         } else if (!/^[a-zA-Z0-9\s&-]+$/.test(user.department)) {
             errors.department = "Department can only contain letters, numbers, spaces, ampersands, and hyphens.";
         }
@@ -146,6 +146,7 @@ const Profile = () => {
     }, [isEditing]);
 
     const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", e)
         const { value } = e.target;
         setEditedUser((prevUser) => prevUser ? { ...prevUser, status: value } : null);
     };
@@ -374,7 +375,7 @@ const Profile = () => {
                                         className="profile-input"
                                     >
                                         <option value="Start">Start</option>
-                                        <option value="InProgress">InProgress</option>
+                                        <option value="InProgress">In_Progress</option>
                                         <option value="Completed">Completed</option>
                                     </select>
                                 ) : (

@@ -288,9 +288,9 @@ const Score = () => {
                         <table className="metrics-table">
                             <thead><tr><th colSpan={2}>Weekly Progress Score</th></tr></thead>
                             <tbody>
-                                <tr><td>Week 1</td><td>{metrics.week1Score}</td></tr>
-                                <tr><td>Week 2</td><td>{metrics.week2Score}</td></tr>
-                                <tr><td>Week 3</td><td>{metrics.week3Score}</td></tr>
+                                <tr><td>Week 1</td><td>{metrics.week1Score}%</td></tr>
+                                <tr><td>Week 2</td><td>{metrics.week2Score}%</td></tr>
+                                <tr><td>Week 3</td><td>{metrics.week3Score}%</td></tr>
                             </tbody>
                         </table>
 
@@ -308,10 +308,10 @@ const Score = () => {
                         <table className="metrics-table">
                             <thead><tr><th colSpan={2}>Evaluations</th></tr></thead>
                             <tbody>
-                                <tr><td>EF Test Score</td><td>{metrics.EFTestScore}</td></tr>
-                                <tr><td>Mock Eval 1</td><td>{metrics.mockEvaluation1Score}</td></tr>
-                                <tr><td>Mock Eval 2</td><td>{metrics.mockEvaluation2Score}</td></tr>
-                                <tr><td>Mock Eval 3</td><td>{metrics.mockEvaluation3Score}</td></tr>
+                                <tr><td>EF Test</td><td>{metrics.EFTestScore}%</td></tr>
+                                <tr><td>Mock Eval 1</td><td>{metrics.mockEvaluation1Score}%</td></tr>
+                                <tr><td>Mock Eval 2</td><td>{metrics.mockEvaluation2Score}%</td></tr>
+                                <tr><td>Mock Eval 3</td><td>{metrics.mockEvaluation3Score}%</td></tr>
                             </tbody>
                         </table>
 
